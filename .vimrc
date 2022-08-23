@@ -34,7 +34,7 @@ nnoremap <C-L> <C-w><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " highlight unneccessary whitespaces
-highlight BadWhitespace ctermbg=yellow guibg=yellow
+highlight BadWhitespace ctermbg=136 guibg=#af8700
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match
   \ BadWhitespace /\s\+$/
 
