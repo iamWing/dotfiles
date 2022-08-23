@@ -1,0 +1,11 @@
+.vscode
+
+# VIM swap files
+*.swp
+
+# Windows thumbnail cache files
+Thumbs.db
+
+# OS X files
+.DS_Store
+._*

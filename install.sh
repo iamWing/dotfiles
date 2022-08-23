@@ -14,6 +14,11 @@ create_symlinks() {
 
   for file in $dotfiles; do
     filename="$(basename "$file")"
+
+    if [ "$filename" = ".gitignore" ]; then
+      continue
+    fi
+
     echo "Creating symlink to $filename in home directory."
     ln -s "$CWD/$filename" ~/"$filename"
   done
