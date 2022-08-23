@@ -20,7 +20,7 @@ create_symlinks() {
     fi
 
     echo "Creating symlink to $filename in home directory."
-    ln -s "$CWD/$filename" ~/"$filename"
+    ln -s "$CWD/$filename" "$HOME"/"$filename"
   done
 }
 
