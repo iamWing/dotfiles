@@ -3,9 +3,9 @@ packadd! onedark.vim
 
 " Set 24-bit (true-colour) mode if available
 if (!empty($COLORTERM) && empty($TMUX))
-    if (has("termguicolors"))
-        set termguicolors
-    endif
+  if (has("termguicolors"))
+    set termguicolors
+  endif
 endif
 
 syntax on               " enable syntax highlighting
@@ -36,7 +36,7 @@ nnoremap <C-H> <C-W><C-H>
 " highlight unneccessary whitespaces
 highlight BadWhitespace ctermbg=yellow guibg=yellow
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match
-    \ BadWhitespace /\s\+$/
+  \ BadWhitespace /\s\+$/
 
 au BufEnter * if &ft == '' | setlocal colorcolumn=
 
