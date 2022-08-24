@@ -26,7 +26,7 @@ create_symlinks() {
   unset _filename _file _dotfiles
 }
 
-# shellcheck source=scripts/vim-setup.sh
+# shellcheck source=vim/vim-setup.sh
 . "$CWD"/vim/vim-setup.sh
 
 create_symlinks
