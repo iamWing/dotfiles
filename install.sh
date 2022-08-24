@@ -27,7 +27,7 @@ create_symlinks() {
 }
 
 # shellcheck source=scripts/vim-setup.sh
-. "$CWD"/scripts/vim-setup.sh
+. "$CWD"/vim/vim-setup.sh
 
 create_symlinks
 

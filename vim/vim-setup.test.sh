@@ -3,16 +3,16 @@
 
 printf "> %s" "$0"
 printf " %s" "$@"
-printf "\n> Test script 'scripts/vim-setup.sh'\n\n"
+printf "\n> Test script 'vim/vim-setup.sh'\n\n"
 
 # cd to repo's root directory
 cd "$(dirname "$(readlink -f -- "$0")")" || exit 1
-cd ..
 CWD=$(pwd)
+ROOT=$(dirname "$(pwd)")
 
 # Source utility scripts
 # shellcheck source=utils/printf-helpers.sh
-. "$CWD"/utils/printf-helpers.sh
+. "$ROOT"/utils/printf-helpers.sh
 
 MOCK=false
 CLEANUP=false
@@ -38,9 +38,9 @@ usage() {
 
 cleanup() {
   if [ "$MOCK" = true ]; then
-    if [ -e "$CWD"/tests/.vim ]; then 
-      printf "Removing existing file(s) on path '%s/tests/.vim'...\n" "$CWD"
-      rm -rf "$CWD"/tests/.vim
+    if [ -e "$ROOT"/tmp/.vim ]; then 
+      printf "Removing existing file(s) on path '%s/tmp/.vim'...\n" "$ROOT"
+      rm -rf "$ROOT"/tmp/.vim
       task_done
     fi
   else
@@ -68,7 +68,7 @@ while getopts "chm" opt; do
 done
 
 # Set up
-if [ "$MOCK" = true ]; then HOME="$CWD"/tests; fi
+if [ "$MOCK" = true ]; then HOME="$ROOT"/tmp; fi
 
 DIR_ONEDARK="$HOME"/.vim/pack/plugins/opt/onedark.vim
 
@@ -76,9 +76,9 @@ cleanup
 
 
 # Test
-printf "Executing script '%s/scripts/vim-setup.sh'...\n" "$CWD"
-# shellcheck source=scripts/vim-setup.sh
-if ! err=$(. "$CWD"/scripts/vim-setup.sh 2>&1 1>/dev/null); then
+printf "Executing script '%s/vim/vim-setup.sh'...\n" "$ROOT"
+# shellcheck source=vim/vim-setup.sh
+if ! err=$(. "$CWD"/vim-setup.sh 2>&1 1>/dev/null); then
   test_failed "%s\n" "$err"
   exit 1
 fi
@@ -108,4 +108,4 @@ unset err
 # Cleanup
 if [ "$CLEANUP" = true ]; then cleanup; fi
 
-unset CWD MOCK CLEANUP
+unset CWD ROOT MOCK CLEANUP
