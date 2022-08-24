@@ -10,21 +10,25 @@ CWD=$(pwd) # Set current working directory
 
 create_symlinks() {
   # Get a list of all dot files in the working directory.
-  dotfiles="$(find "$CWD" -maxdepth 1 -type f -name ".*")"
+  _dotfiles="$(find "$CWD" -maxdepth 1 -type f -name ".*")"
 
-  for file in $dotfiles; do
-    filename="$(basename "$file")"
+  for _file in $_dotfiles; do
+    _filename="$(basename "$_file")"
 
-    if [ "$filename" = ".gitignore" ]; then
+    if [ "$_filename" = ".gitignore" ]; then
       continue
     fi
 
-    echo "Creating symlink to $filename in home directory."
-    ln -s "$CWD/$filename" "$HOME"/"$filename"
+    printf "Creating symlink to %s in home directory.\n" "$_filename"
+    ln -s "$CWD/$_filename" "$HOME"/"$_filename"
   done
+
+  unset _filename _file _dotfiles
 }
 
 # shellcheck source=scripts/vim-setup.sh
 . "$CWD"/scripts/vim-setup.sh
 
 create_symlinks
+
+unset CWD
