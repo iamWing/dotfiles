@@ -1,4 +1,5 @@
 .vscode
+tests/.vim
 
 # VIM swap files
 *.swp
