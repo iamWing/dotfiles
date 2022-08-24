@@ -1,0 +1,23 @@
+name: 'Test shell scripts: All'
+
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - '.gitignore'
+  pull_request:
+    types: [open, reopened, synchronize, review_requested, ready_for_review]
+    paths-ignore:
+      - '.gitignore'
+
+jobs:
+  vim-setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Test `scripts/vim-setup.sh`
+        run: |
+          ./tests/vim-setup.test.sh -m -c
+
