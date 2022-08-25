@@ -4,12 +4,10 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '!.gitignore'
       - '**.sh'
   pull_request:
     types: [opened, reopened, synchronize, review_requested, ready_for_review]
     paths:
-      - '!.gitignore'
       - '**.sh'
   
 jobs:
