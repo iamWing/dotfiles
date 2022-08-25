@@ -33,3 +33,14 @@ printf_red() {
 
   unset _fmt
 }
+
+verbose_print() {
+  if [ "$VERBOSE" = true ]; then
+    _fmt=$1
+    shift
+
+    printf "$_fmt" "$@"
+
+    unset _fmt
+  fi
+}
