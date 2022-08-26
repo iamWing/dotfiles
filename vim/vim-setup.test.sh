@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # shellcheck disable=SC2059
 
 printf "> %s" "$0"
@@ -6,9 +6,8 @@ printf " %s" "$@"
 printf "\n> Test script 'vim/vim-setup.sh'\n\n"
 
 # cd to script's directory
-cd "$(dirname "$(readlink -f -- "$0")")" || exit 1
-CWD=$(pwd)
-ROOT=$(dirname "$(pwd)")
+SCRIPT_PATH=$(cd -- "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+ROOT=$(dirname "$SCRIPT_PATH")
 
 # Source utility scripts
 # shellcheck source=utils/printf-helpers.sh
@@ -96,7 +95,7 @@ printf "\n: Execute test cases :\n"
 
 printf "Executing script '%s/vim/vim-setup.sh'...\n" "$ROOT"
 # shellcheck source=vim/vim-setup.sh
-if ! err=$(. "$CWD"/vim-setup.sh 2>&1 1>/dev/null); then
+if ! err=$(. "$SCRIPT_PATH"/vim-setup.sh 2>&1 1>/dev/null); then
   test_failed "%s\n" "$err"
   exit 1
 fi
@@ -134,6 +133,6 @@ test_passed
 printf "\n: Clean up :\n"
 if [ "$CLEANUP" = true ]; then cleanup; fi
 
-unset CWD ROOT MOCK CLEANUP
+unset SCRIPT_PATH ROOT MOCK CLEANUP
 unset task_done task_passed task_failed usage
 unset DIR_ONEDARK PATH_VIMRC

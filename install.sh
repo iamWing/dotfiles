@@ -1,12 +1,11 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 set -e
 
 # cd to script's directory
-cd "$(dirname "$(readlink -f -- "$0")")"
+cd -- "$(dirname "${BASH_SOURCE[0]}")"
 
 CWD=$(pwd) # Set current working directory
-
 
 create_symlinks() {
   # Get a list of all dot files in the working directory.
@@ -27,7 +26,7 @@ create_symlinks() {
 }
 
 # shellcheck source=vim/vim-setup.sh
-. "$CWD"/vim/vim-setup.sh
+. "$CWD"/vim/vim-setup.sh -f -v
 
 create_symlinks
 

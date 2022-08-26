@@ -1,9 +1,8 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # cd to script's directory
-cd "$(dirname "$(readlink -f -- "$0")")" || exit 1
-CWD=$(pwd)
-ROOT=$(dirname "$(pwd)")
+SCRIPT_PATH=$(cd -- "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+ROOT=$(dirname "$SCRIPT_PATH")
 
 # Source utility scripts
 # shellcheck source=utils/printf-helpers.sh
@@ -70,7 +69,7 @@ ln -s "$SCRIPT_PATH"/.vimrc "$HOME"/.vimrc
 verbose_print "DONE\n\n"
 
 # Cleanup
-unset CWD ROOT ONEDARK_PATH
+unset SCRIPT_PATH ROOT ONEDARK_PATH
 unset usage
 
 # Not unset VERBOSE as this variable is intended to be shared across
