@@ -12,21 +12,6 @@ ROOT=$(dirname "$SCRIPT_PATH")
 MOCK=true
 CLEANUP=false
 
-task_done() ( printf_green -- "- Done\n" )
-
-test_passed() ( printf_green "%s Passed\n" "-" )
-
-test_failed() { 
-  _fail_msg="$1"
-  shift
-
-  printf_red "%s Failed\n" "-"
-  printf "  "
-  printf_red "$_fail_msg" "$@" 1>&2
-
-  unset _fail_msg
-}
-
 usage() {
   printf "Usage: %s [-c|h|n]\n\n" "$0"
   printf "OPTIONS:\n"
@@ -76,7 +61,7 @@ while getopts "chn" opt; do
   esac
 done
 
-printf "> %s" "$0"
+printf "> %s" "${BASH_SOURCE[0]}"
 printf " %s" "$@"
 printf "\n> Test script 'vim/vim-setup.sh'\n\n"
 
@@ -124,6 +109,7 @@ if ! err=$(vim -u NONE -c "$VIM_TEST_CMD" 2>/dev/null); then
   exit 1
 fi
 test_passed
+unset VIM_TEST_CMD
 unset err
 
 printf "Checking is '.vimrc' exists on path '%s'...\n" "$PATH_VIMRC"
@@ -138,5 +124,5 @@ printf "\n: Clean up :\n"
 if [ "$CLEANUP" = true ]; then cleanup; fi
 
 unset SCRIPT_PATH ROOT MOCK CLEANUP
-unset task_done task_passed task_failed usage
+unset usage cleanup
 unset DIR_ONEDARK PATH_VIMRC

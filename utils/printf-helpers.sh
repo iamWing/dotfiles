@@ -44,3 +44,18 @@ verbose_print() {
     unset _fmt
   fi
 }
+
+task_done() ( printf_green -- "- Done\n" )
+
+test_passed() ( printf_green "%s Passed\n" "-" )
+
+test_failed() { 
+  _fail_msg="$1"
+  shift
+
+  printf_red "%s Failed\n" "-"
+  printf "  "
+  printf_red "$_fail_msg" "$@" 1>&2
+
+  unset _fail_msg
+}
