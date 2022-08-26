@@ -11,7 +11,7 @@ ROOT=$(dirname "$SCRIPT_PATH")
 FORCE=false
 
 usage() {
-  printf "Usage: %s [-f|h|v]\n\n" "$0"
+  printf "Usage: %s [-f|h|v]\n\n" "${BASH_SOURCE[0]}"
   printf "OPTIONS:\n"
   printf "  -f\t\tforce mode; overwrites existing files\n"
   printf "  -v\t\tverbose mode\n"
@@ -32,6 +32,7 @@ while getopts "fhv" opt; do
       ;;
   esac
 done
+unset opt
 
 # Setup `onedark.vim` theme
 verbose_print "> Setting up VIM theme 'onedark.vim'...\n\n"
@@ -69,8 +70,8 @@ ln -s "$SCRIPT_PATH"/.vimrc "$HOME"/.vimrc
 verbose_print "DONE\n\n"
 
 # Cleanup
-unset SCRIPT_PATH ROOT ONEDARK_PATH
 unset usage
+unset SCRIPT_PATH ROOT ONEDARK_PATH
 
 # Not unset VERBOSE as this variable is intended to be shared across
 # different sctips.

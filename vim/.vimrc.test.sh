@@ -9,7 +9,7 @@ ROOT=$(dirname "$SCRIPT_PATH")
 . "$ROOT"/utils/printf-helpers.sh
 
 usage() {
-  printf "Usage: %s [-h]\n\n" "$0"
+  printf "Usage: %s [-h]\n\n" "${BASH_SOURCE[0]}"
   printf "OPTIONS:\n"
   printf "  -h\t\thelp\n"
 }
@@ -26,6 +26,7 @@ while getopts "h" opt; do
       ;;
   esac
 done
+unset opt
 
 printf "> %s" "${BASH_SOURCE[0]}"
 printf " %s" "$@"
@@ -40,5 +41,5 @@ fi
 test_passed
 unset err
 
-unset opt
+unset usage
 unset SCRIPT_PATH ROOT

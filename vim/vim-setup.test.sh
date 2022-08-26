@@ -13,7 +13,7 @@ MOCK=true
 CLEANUP=false
 
 usage() {
-  printf "Usage: %s [-c|h|n]\n\n" "$0"
+  printf "Usage: %s [-c|h|n]\n\n" "${BASH_SOURCE[0]}"
   printf "OPTIONS:\n"
   printf "  -c\t\tcleanup output directory\n"
   printf "  -n\t\tdiable mock on \$HOME\n"
@@ -60,6 +60,7 @@ while getopts "chn" opt; do
       ;;
   esac
 done
+unset opt
 
 printf "> %s" "${BASH_SOURCE[0]}"
 printf " %s" "$@"
