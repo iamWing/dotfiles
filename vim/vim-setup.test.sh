@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2059
 
-# cd to script's directory
+# Get script's directory
 SCRIPT_PATH=$(cd -- "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 ROOT=$(dirname "$SCRIPT_PATH")
 

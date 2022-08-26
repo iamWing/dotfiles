@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# cd to script's directory
+# Get script's directory
 SCRIPT_PATH=$(cd -- "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 ROOT=$(dirname "$SCRIPT_PATH")
 
