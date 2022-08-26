@@ -23,5 +23,5 @@ jobs:
 
       - name: Test `vim/vim-setup.sh`
         run: |
-          ./vim/vim-setup.test.sh -m -c
+          ./vim/vim-setup.test.sh -c
 

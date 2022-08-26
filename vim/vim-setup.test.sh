@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2059
 
-printf "> %s" "$0"
-printf " %s" "$@"
-printf "\n> Test script 'vim/vim-setup.sh'\n\n"
-
 # cd to script's directory
 SCRIPT_PATH=$(cd -- "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 ROOT=$(dirname "$SCRIPT_PATH")
@@ -13,7 +9,7 @@ ROOT=$(dirname "$SCRIPT_PATH")
 # shellcheck source=utils/printf-helpers.sh
 . "$ROOT"/utils/printf-helpers.sh
 
-MOCK=false
+MOCK=true
 CLEANUP=false
 
 task_done() ( printf_green -- "- Done\n" )
@@ -32,7 +28,11 @@ test_failed() {
 }
 
 usage() {
-  printf "Usage: %s [-c|h|m]\n" "$0"
+  printf "Usage: %s [-c|h|n]\n\n" "$0"
+  printf "OPTIONS:\n"
+  printf "  -c\t\tcleanup output directory\n"
+  printf "  -n\t\tdiable mock on \$HOME\n"
+  printf "  -h\t\thelp\n"
 }
 
 cleanup() {
@@ -61,20 +61,24 @@ cleanup() {
   fi
 }
 
-while getopts "chm" opt; do
+while getopts "chn" opt; do
   case "$opt" in
     c) CLEANUP=true ;;
     h) 
       usage
       exit 0
       ;;
-    m) MOCK=true ;;
+    n) MOCK=false ;;
     *)
       usage
       exit 2
       ;;
   esac
 done
+
+printf "> %s" "$0"
+printf " %s" "$@"
+printf "\n> Test script 'vim/vim-setup.sh'\n\n"
 
 # Set up
 printf ": Set up :\n"
@@ -87,7 +91,7 @@ fi
 DIR_ONEDARK="$HOME"/.vim/pack/plugins/opt/onedark.vim
 PATH_VIMRC="$HOME"/.vimrc
 
-cleanup
+if [ "$CLEANUP" = true ]; then cleanup; fi
 
 
 # Test
