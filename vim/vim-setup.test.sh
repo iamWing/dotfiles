@@ -16,7 +16,7 @@ usage() {
   printf "Usage: %s [-c|h|n]\n\n" "${BASH_SOURCE[0]}"
   printf "OPTIONS:\n"
   printf "  -c\t\tcleanup output directory\n"
-  printf "  -n\t\tdiable mock on \$HOME\n"
+  printf "  -n\t\tdisable mock on \$HOME\n"
   printf "  -h\t\thelp\n"
 }
 
