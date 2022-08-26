@@ -24,4 +24,12 @@ jobs:
       - name: Test `vim/vim-setup.sh`
         run: |
           ./vim/vim-setup.test.sh -c
+  .vimrc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Test `vim/.vimrc`
+        run: ./vim/.vimrc.test.sh
 
