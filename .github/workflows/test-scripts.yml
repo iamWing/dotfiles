@@ -31,5 +31,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Test `vim/.vimrc`
-        run: ./vim/.vimrc.test.sh
+        run: |
+          chmod +x ./vim/vim-setup.sh
+          ./vim/vim-setup.sh -f -v
+          ./vim/.vimrc.test.sh
 
