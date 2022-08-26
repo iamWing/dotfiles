@@ -54,7 +54,6 @@ test_failed() {
   shift
 
   printf_red "%s Failed\n" "-"
-  printf "  "
   printf_red "$_fail_msg" "$@" 1>&2
 
   unset _fail_msg
