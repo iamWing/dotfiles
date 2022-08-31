@@ -32,7 +32,14 @@ jobs:
 
       - name: Test `vim/.vimrc`
         run: |
-          chmod +x ./vim/vim-setup.sh
           ./vim/vim-setup.sh -f -v
           ./vim/.vimrc.test.sh
+  install-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
+      - name: Test `install.sh`
+        run: |
+          ./install.test.sh
