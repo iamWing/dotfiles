@@ -4,7 +4,6 @@ set -e
 
 # cd to script's directory
 cd -- "$(dirname "${BASH_SOURCE[0]}")"
-
 CWD=$(pwd) # Set current working directory
 
 create_symlinks() {
@@ -25,9 +24,11 @@ create_symlinks() {
   unset _filename _file _dotfiles
 }
 
+printf ": VIM Setup :\n\n"
 # shellcheck source=vim/vim-setup.sh
 . "$CWD"/vim/vim-setup.sh -f -v
 
 create_symlinks
 
+unset create_symlinks
 unset CWD
